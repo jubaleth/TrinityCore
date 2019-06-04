@@ -888,6 +888,27 @@ namespace WorldPackets
 
             ObjectGuid SourceGuid;
         };
+
+
+        class AdventureJournalOpenQuest final : public ClientPacket
+        {
+        public:
+            AdventureJournalOpenQuest(WorldPacket&& packet) : ClientPacket(CMSG_ADVENTURE_JOURNAL_OPEN_QUEST, std::move(packet)) { }
+
+            void Read() override;
+
+            int32 entryId;
+        };
+
+        class AdventureJournalStartQuest final : public ClientPacket
+        {
+        public:
+            AdventureJournalStartQuest(WorldPacket&& packet) : ClientPacket(CMSG_ADVENTURE_JOURNAL_START_QUEST, std::move(packet)) { }
+
+            void Read() override;
+
+            int32 QuestID;
+        };
     }
 }
 

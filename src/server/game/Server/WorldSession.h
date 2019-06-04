@@ -466,6 +466,8 @@ namespace WorldPackets
         class SetTaxiBenchmarkMode;
         class MountSetFavorite;
         class CloseInteraction;
+        class AdventureJournalStartQuest;
+        class AdventureJournalOpenQuest;
     }
 
     namespace Movement
@@ -1657,6 +1659,8 @@ class TC_GAME_API WorldSession
         void HandleUseToy(WorldPackets::Toy::UseToy& packet);
 
         void HandleMountSetFavorite(WorldPackets::Misc::MountSetFavorite& mountSetFavorite);
+        void HandleAdventureOpenQuest(WorldPackets::Misc::AdventureJournalOpenQuest& packet);
+        void HandleAdventureStartQuest(WorldPackets::Misc::AdventureJournalStartQuest& packet);
 
         // Scenes
         void HandleSceneTriggerEvent(WorldPackets::Scenes::SceneTriggerEvent& sceneTriggerEvent);

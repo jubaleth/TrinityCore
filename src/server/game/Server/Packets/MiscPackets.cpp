@@ -678,3 +678,13 @@ void WorldPackets::Misc::CloseInteraction::Read()
 {
     _worldPacket >> SourceGuid;
 }
+
+void WorldPackets::Misc::AdventureJournalOpenQuest::Read()
+{
+    _worldPacket >> entryId;
+}
+
+void WorldPackets::Misc::AdventureJournalStartQuest::Read()
+{
+    _worldPacket >> QuestID;
+}

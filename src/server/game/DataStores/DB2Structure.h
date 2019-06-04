@@ -45,6 +45,34 @@ struct AchievementEntry
     int16 SharesCriteria;                                           // referenced achievement (counting of all completed criterias)
 };
 
+
+struct AdventureJournalEntry
+{
+    int32 ID;
+    LocalizedString* Name;
+    LocalizedString* Description;
+    LocalizedString* ButtonText;
+    LocalizedString* RewardDescription;
+    LocalizedString* ContinueDescription;
+    uint8 Type;
+    uint32 PlayerCondition;
+    uint8 Flags;
+    uint8 ButtonActionType;
+    int32 TextureFileDataID;
+    uint16 LfgDungeonID;
+    uint16 QuestID;
+    uint16 BattleMasterListID;
+    uint8 PriorityMin;
+    uint8 PriorityMax;
+    int32 ItemID;
+    uint32 ItemQuantity;
+    uint16 CurrencyType;
+    uint8 CurrencyQuantity;
+    uint16 UIMapID;
+    uint32 BonusPlayerConditionID[2];
+    uint8 BonusValue[2];
+};
+
 struct AnimationDataEntry
 {
     uint32 ID;

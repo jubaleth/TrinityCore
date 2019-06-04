@@ -37,6 +37,7 @@
 #endif
 
 DB2Storage<AchievementEntry>                    sAchievementStore("Achievement.db2", AchievementLoadInfo::Instance());
+DB2Storage<AdventureJournalEntry>               sAdventureJournalStore("AdventureJournal.db2", AdventureJournalInfo::Instance());
 DB2Storage<AnimationDataEntry>                  sAnimationDataStore("AnimationData.db2", AnimationDataLoadInfo::Instance());
 DB2Storage<AnimKitEntry>                        sAnimKitStore("AnimKit.db2", AnimKitLoadInfo::Instance());
 DB2Storage<AreaGroupMemberEntry>                sAreaGroupMemberStore("AreaGroupMember.db2", AreaGroupMemberLoadInfo::Instance());
@@ -295,6 +296,7 @@ struct ItemLevelSelectorQualityEntryComparator
 
 typedef std::map<uint32 /*hash*/, DB2StorageBase*> StorageMap;
 typedef std::unordered_map<uint32 /*areaGroupId*/, std::vector<uint32/*areaId*/>> AreaGroupMemberContainer;
+typedef std::unordered_map<uint32, std::vector<AdventureJournalEntry const*>> AdventureJournalContainer;
 typedef std::unordered_map<uint32, std::vector<ArtifactPowerEntry const*>> ArtifactPowersContainer;
 typedef std::unordered_map<uint32, std::unordered_set<uint32>> ArtifactPowerLinksContainer;
 typedef std::unordered_map<std::pair<uint32, uint8>, ArtifactPowerRankEntry const*> ArtifactPowerRanksContainer;
@@ -351,6 +353,7 @@ namespace
     std::map<std::pair<uint32 /*tableHash*/, int32 /*recordId*/>, std::vector<uint8>> _hotfixBlob;
 
     AreaGroupMemberContainer _areaGroupMembers;
+    AdventureJournalContainer _adventureJournals;
     ArtifactPowersContainer _artifactPowers;
     ArtifactPowerLinksContainer _artifactPowerLinks;
     ArtifactPowerRanksContainer _artifactPowerRanks;
@@ -494,6 +497,7 @@ void DB2Manager::LoadStores(std::string const& dataPath, uint32 defaultLocale)
 #define LOAD_DB2(store) LoadDB2(availableDb2Locales, bad_db2_files, _stores, &store, db2Path, defaultLocale, store)
 
     LOAD_DB2(sAchievementStore);
+    LOAD_DB2(sAdventureJournalStore);
     LOAD_DB2(sAnimationDataStore);
     LOAD_DB2(sAnimKitStore);
     LOAD_DB2(sAreaGroupMemberStore);
@@ -737,6 +741,9 @@ void DB2Manager::LoadStores(std::string const& dataPath, uint32 defaultLocale)
 
     for (AreaGroupMemberEntry const* areaGroupMember : sAreaGroupMemberStore)
         _areaGroupMembers[areaGroupMember->AreaGroupID].push_back(areaGroupMember->AreaID);
+
+    for (AdventureJournalEntry const* adventureJournal : sAdventureJournalStore)
+        _adventureJournals[adventureJournal->ID].push_back(adventureJournal);
 
     for (ArtifactPowerEntry const* artifactPower : sArtifactPowerStore)
         _artifactPowers[artifactPower->ArtifactID].push_back(artifactPower);
