@@ -1660,7 +1660,6 @@ class TC_GAME_API WorldSession
 
         void HandleMountSetFavorite(WorldPackets::Misc::MountSetFavorite& mountSetFavorite);
         void HandleAdventureOpenQuest(WorldPackets::Misc::AdventureJournalOpenQuest& packet);
-        void HandleAdventureStartQuest(WorldPackets::Misc::AdventureJournalStartQuest& packet);
 
         // Scenes
         void HandleSceneTriggerEvent(WorldPackets::Scenes::SceneTriggerEvent& sceneTriggerEvent);
